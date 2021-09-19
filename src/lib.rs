@@ -122,9 +122,10 @@ impl fmt::Display for ConfyError {
         match self {
             #[cfg(feature = "toml_conf")]
             ConfyError::BadTomlData(e) => write!(f, "Bad TOML data: {}", e),
+            
             #[cfg(feature = "toml_conf")]
-            ConfyError::SerializeTomlError(_) => {
-                write!(f, "Failed to serialize configuration data into TOML.")
+            ConfyError::SerializeTomlError(e) => {
+                write!(f, "Failed to serialize configuration data into TOML. Error: {}", e)
             }
 
             #[cfg(feature = "yaml_conf")]
